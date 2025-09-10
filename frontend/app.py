@@ -21,12 +21,16 @@ elif choice == "Validate Receipt":
         response = requests.post(f"{API_URL}/validate/{file_id}")
         st.write(response.json())
 
-elif choice == "Process Receipt":
+elif choice == "Process Receipts":
     file_id = st.number_input("Enter File ID", min_value=1)
     if st.button("Process"):
-        response = requests.post(f"{API_URL}/process/{file_id}")
+        response = requests.post(f"{API_URL}/process_receipt/{file_id}")
         st.write(response.json())
 
 elif choice == "View Receipts":
     response = requests.get(f"{API_URL}/receipts")
     st.write(response.json())
+
+
+
+

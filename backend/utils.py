@@ -1,6 +1,6 @@
 import pdfplumber
 import pandas as pd
-from parser_logic import extract_custom_fields_by_id, CUSTOM_LABELS
+from parser_logic import extract_receipt_to_dataframe, CUSTOM_LABELS
 
 import os
 import pdfplumber
@@ -21,7 +21,7 @@ def extract_text_pdfplumber(pdf_path: str) -> str:
 
 
 def extract_receipt_data(file_path: str) -> pd.DataFrame:
-    raw_dict = extract_custom_fields_by_id(file_path)
+    raw_dict = extract_receipt_to_dataframe(file_path)
 
     raw_total = raw_dict.get("TOTAL_AMOUNT")
     try:
