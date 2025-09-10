@@ -7,8 +7,11 @@ import sqlite3, json
 from datetime import datetime
 import httpx
 import asyncio
-API_URL = "http://127.0.0.1:8000"
+#API_URL = "http://127.0.0.1:8000"
+API_URL = "https://your-backend.onrender.com"
 
+response = requests.get(f"{API_URL}/receipts")
+data = response.json()
 
 st.set_page_config(page_title= "Home",page_icon="./static/home.png",initial_sidebar_state="expanded",layout="wide")
 
