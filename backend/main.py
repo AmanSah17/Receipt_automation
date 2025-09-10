@@ -26,6 +26,39 @@ class ReceiptRequest(BaseModel):
     file_id: int
     file_name: str
 
+
+from fastapi import FastAPI, HTTPException
+import databases
+import sqlalchemy
+import json
+
+
+DATABASE_URL_2 = "sqlite+aiosqlite:///./processed_receipts.db"
+
+# Async DB setup
+database = databases.Database(DATABASE_URL_2)
+metadata = sqlalchemy.MetaData()
+
+processed_receipts = sqlalchemy.Table(
+    "processed_receipts",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
+    sqlalchemy.Column("receipt_id", sqlalchemy.Integer, nullable=False),
+    sqlalchemy.Column("processed_at", sqlalchemy.String, nullable=False),
+    sqlalchemy.Column("response_json", sqlalchemy.Text, nullable=False),
+)
+
+
+engine = sqlalchemy.create_engine("sqlite:///./processed_receipts.db")
+metadata.create_all(engine)
+
+
+
+
+
+
+    
+
 # Create tables
 Base.metadata.create_all(bind=engine)
 
@@ -40,6 +73,10 @@ def get_db():
 
 UPLOAD_FOLDER = "./uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+
+
+
 
 # --- Routes ---
 
@@ -161,5 +198,26 @@ def get_receipt(receipt_id: int, db: Session = Depends(get_db)):
     if not receipt:
         raise HTTPException(status_code=404, detail="Receipt not found")
     return receipt
+
+
+
+
+
+@app.get("/search/{receipt_id}")
+async def search_receipt(receipt_id: int):
+    query = processed_receipts.select().where(processed_receipts.c.receipt_id == receipt_id)
+    rows = await database.fetch_all(query)
+
+    if not rows:
+        raise HTTPException(status_code=404, detail="Receipt not found")
+
+    results = []
+    for row in rows:
+        result = dict(row)
+        result["response_json"] = json.loads(result["response_json"])
+        results.append(result)
+
+    return {"receipt_id": receipt_id, "records": results}
+
 
 
