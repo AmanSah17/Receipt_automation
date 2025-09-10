@@ -5,9 +5,10 @@ import sqlite3
 from datetime import datetime
 import json
 import os
-from config import DB_PATH
+
 st.title("Receipt Processing Software")
 
+DB_PATH = "processed_receipts.db"
 
 # ---------------- Create DB schema if not exists ----------------
 def init_db():
@@ -33,8 +34,6 @@ def save_processed_result(receipt_id, response_json):
     """, (receipt_id, datetime.utcnow().isoformat(), json.dumps(response_json)))
     conn.commit()
     conn.close()
-    print(f"[DEBUG] Saved receipt_id={receipt_id} to DB at {DB_PATH}")
-
 
 def get_all_processed():
     conn = sqlite3.connect(DB_PATH)
@@ -78,5 +77,6 @@ if st.button("Process Receipt"):
 # ---------------- Step 3: Show logs ----------------
 st.subheader("Processed Receipts Log (Local DB)")
 st.dataframe(get_all_processed())
+
 
 
