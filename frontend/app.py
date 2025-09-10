@@ -8,7 +8,7 @@ from datetime import datetime
 import httpx
 import asyncio
 #API_URL = "http://127.0.0.1:8000"
-API_URL = "https://your-backend.onrender.com:8000"
+API_URL = "https://receipt-automation-backend-6nbp.onrender.com:8000"
 
 response = requests.get(f"{API_URL}/")
 data = response.json()
