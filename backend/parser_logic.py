@@ -5,6 +5,15 @@ import spacy
 import pdfplumber
 from sqlalchemy.orm import Session
 from models import ReceiptFile  # Your SQLAlchemy model
+from spacy.cli import download
+
+def load_spacy_model(model_name="en_core_web_sm"):
+    try:
+        return spacy.load(model_name)
+    except OSError:
+        print(f"Downloading spaCy model: {model_name}...")
+        download(model_name)
+        return spacy.load(model_name)
 
 # Load spaCy model once
 nlp = spacy.load("en_core_web_sm")

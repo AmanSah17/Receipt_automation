@@ -1,7 +1,10 @@
 import streamlit as st
 import requests
 
-import streamlit as st
+
+from config import DB_PATH
+import sqlite3, json
+from datetime import datetime
 import httpx
 import asyncio
 API_URL = "http://127.0.0.1:8000"
@@ -86,10 +89,6 @@ if choice == "View Receipts":
 
 
 
-
-from config import DB_PATH
-import sqlite3, json
-from datetime import datetime
 
 def save_processed_result(receipt_id, response_json):
     conn = sqlite3.connect(DB_PATH)
