@@ -7,8 +7,8 @@ import sqlite3, json
 from datetime import datetime
 import httpx
 import asyncio
-#API_URL = "http://127.0.0.1:8000"
-API_URL = "https://receipt-automation-backend-6nbp.onrender.com:8000"
+API_URL = "http://127.0.0.1:8000"
+#API_URL = "https://receipt-automation-backend-6nbp.onrender.com:8000"
 
 response = requests.get(f"{API_URL}/receipts")
 data = response.json()
@@ -17,6 +17,42 @@ st.set_page_config(page_title= "Home",page_icon="./static/home.png",initial_side
 
 
 st.title("Autonomous Receipt Management ")
+
+
+
+with st.container():
+    st.markdown("""
+            
+            
+     Receipt Automation system that allows users to upload scanned receipts (PDF files only--- currently.)
+     The backend validates files, runs OCR + layout analysis, extracts structured fields (date, merchant, total, line items, taxes, payment method), 
+    stores metadata and parsed results into a lightweight SQLite database.       
+            
+            
+            
+            """)
+    col1,col2 = st.columns(2)
+    with col1:
+        st.image("frontend\static\dashboard.png")
+
+    with col2:
+        st.markdown("""
+        This web app demonstrates the **Receipt Automation** project. 
+                    Users can:
+
+
+        - Upload scanned receipts (PDF files only !)
+                    
+                    """)
+        
+        st.markdown("""
+                **Developer:** Aman Sah \n
+                **Email:** [amansah1717@gmail.com](mailto:amansah1717@gmail.com)
+                **GitHub:** [github.com/Amansah17](https://github.com/Amansah17)
+                **Portfolio:** [sahaman-smarted.onrender.com](https://sahaman-smarted.onrender.com/)
+                **LinkedIn:** [linkedin.com/in/aman-sah-8a320b14b](https://www.linkedin.com/in/aman-sah-8a320b14b/)
+
+        """)
 
 
 # Two columns layout

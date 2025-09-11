@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import requests
 
-st.title("Receipt Processing Software")
+st.title("Receipt Processing Software Solution")
 
 # ---------------- Step 1: Fetch all receipts ----------------
 response = requests.get("http://localhost:8000/list_receipts/")

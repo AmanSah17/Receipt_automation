@@ -6,7 +6,10 @@ from datetime import datetime
 import json
 import os
 
-st.title("Receipt Processing Software")
+
+
+st.set_page_config(layout="wide",initial_sidebar_state="collapsed")
+st.title("Receipt Processing Service")
 
 DB_PATH = "processed_receipts.db"
 
@@ -59,6 +62,7 @@ receipt_id = st.number_input("Enter Receipt ID to Process:", min_value=1, step=1
 
 if st.button("Process Receipt"):
     response = requests.post(f"http://localhost:8000/process_receipt/{receipt_id}")
+    st.balloons()
     if response.status_code == 200:
         data = response.json().get("data", [])
         if data:
@@ -74,9 +78,14 @@ if st.button("Process Receipt"):
     else:
         st.error(f"Error: {response.json().get('detail')}")
 
+
+
 # ---------------- Step 3: Show logs ----------------
-st.subheader("Processed Receipts Log (Local DB)")
-st.dataframe(get_all_processed())
+if st.button("Show Processed database"):
+
+    st.subheader("Processed Receipts saved to the receipt processed database !")
+    st.balloons()
+    st.dataframe(get_all_processed())
 
 
 

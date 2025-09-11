@@ -7,30 +7,34 @@ from typing import List
 from fastapi.responses import JSONResponse
 from database import Base, engine, SessionLocal
 import models, crud, utils, schemas
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy.orm import Session
+
+
 import models, crud, schemas, utils
 from database import get_db
 from parser_logic import  CUSTOM_LABELS , extract_receipt_to_dataframe
 from datetime import datetime
-from fastapi.responses import JSONResponse
-import utils, crud, schemas, models
-from database import get_db  # your DB session generator
-from parser_logic import extract_receipt_to_dataframe 
+
+ 
 from pydantic import BaseModel
 
+import databases
+import sqlalchemy
+import json
 import pandas as pd
 from models import ReceiptFile
+
+
+
+
+
+###pydantic schema for Receipt Request inhereting from Basemodel.
 
 class ReceiptRequest(BaseModel):
     file_id: int
     file_name: str
 
 
-from fastapi import FastAPI, HTTPException
-import databases
-import sqlalchemy
-import json
+
 
 
 DATABASE_URL_2 = "sqlite+aiosqlite:///./processed_receipts.db"
