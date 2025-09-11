@@ -50,7 +50,7 @@ automate-accounts/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/automate-accounts.git
+git clone https://github.com/AmanSah17/Receipt_automation.git
 cd automate-accounts
 ````
 
@@ -83,20 +83,13 @@ This runs the API on `http://localhost:8000`
 
 ### 2. Start the Frontend
 
-If using **Streamlit**:
+ using **Streamlit**:
 
 ```bash
 cd frontend
 streamlit run app.py
 ```
 
-If using **React/Vite**:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
 
 ---
 
@@ -193,7 +186,7 @@ curl -X POST "http://localhost:8000/process" \
   "status": "processed",
   "details": {
     "vendor": "Amazon",
-    "amount": "₹1999",
+    "total_amount": "₹1999",
     "date": "2025-09-10"
   }
 }
@@ -205,11 +198,11 @@ curl -X POST "http://localhost:8000/process" \
 
 ### Upload Page
 
-![Upload Screenshot](docs/screenshots/upload.png)
+![Upload Screenshot](frontend\static\dashboard.png)
 
 ### Receipt List Page
 
-![Receipts Screenshot](docs/screenshots/receipts.png)
+![Receipts Screenshot](Images\receipts.png)
 
 ---
 
@@ -253,7 +246,7 @@ Deploy to:
 
 ## 📜 License
 
-MIT License © 2025 \[Your Name]
+Apache License © 2025 \[Aman Sah ]
 
 ---
 
@@ -266,11 +259,12 @@ For major changes, please open an issue first to discuss what you’d like to ch
 
 ## 🧑‍💻 Author
 
-Developed by **[Your Name](https://github.com/your-username)** ✨
+Developed by **[Your Name](https://github.com/AmanSah17/)** 
 
-```
 
----
 
-👉 Do you want me to also create a **`docs/screenshots/`** folder structure with placeholder `.png` files so GitHub shows those screenshots properly?
-```
+
+
+
+
+
