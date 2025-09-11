@@ -259,7 +259,7 @@ For major changes, please open an issue first to discuss what you’d like to ch
 
 ## 🧑‍💻 Author
 
-Developed by **[Your Name](https://github.com/AmanSah17/)** 
+Developed by **[Mr. Aman Sah](https://github.com/AmanSah17/)** 
 
 
 
