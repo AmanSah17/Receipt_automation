@@ -1,8 +1,4 @@
-Perfect 👍 Here’s a **complete `README.md`** file in Markdown that includes **example screenshots (placeholders)** and **cURL commands** so new contributors can test the API right away.
 
----
-
-```markdown
 # 📑 Automate Accounts – Receipt Management System
 
 A full-stack receipt automation system that allows users to **upload, process, and manage receipts**.  
