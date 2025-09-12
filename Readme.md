@@ -195,15 +195,19 @@ curl -X POST "http://localhost:8000/process" \
 ---
 
 ## 📸 Screenshots
+### Categories Extracted 
+!(<img src="frontend\static\non-null.png" alt="Extraction Caategories" width="720"/>
+)
 
 ### Upload Page
 
-!(<img src="frontend\static\file_upload.png" alt="Upload and Validation Page" width="400"/>
+!!(<img src="frontend\static\file_upload.png" alt="Upload and Validation Page" width="720"/>
 )
 
 ### Receipt List Page
 
-![Receipts Screenshot](Images\receipts.png)
+!!!(<img src="frontend\static\upload_db.png" alt="Upload_db" width="720"/>
+)
 
 ---
 
