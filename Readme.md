@@ -209,25 +209,10 @@ curl -X POST "http://localhost:8000/process" \
 !!!(<img src="frontend\static\upload_db.png" alt="Upload_db" width="720"/>
 )
 
+### Processed Database Page
+!!!!(<img src="frontend\static\processed_db.png" alt="processed_db" width="720"/>)
 ---
 
-## ⚡ Common Issues
-
-### ❌ Connection refused: `http://localhost:8000`
-
-* Ensure backend is running:
-
-  ```bash
-  uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
-  ```
-* If deployed (e.g., Render, Railway, etc.), replace
-  `http://localhost:8000` with your backend’s **public URL** in the frontend code:
-
-  ```python
-  BASE_URL = "https://your-backend.onrender.com"
-  ```
-
----
 
 ## 🚀 Deployment
 
