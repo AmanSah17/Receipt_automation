@@ -75,3 +75,5 @@ with st.container():
     with details:
         st.markdown("Github url: https://github.com/AmanSah17/Receipt_automation.git")
         st.markdown("youtube -----------")
+
+        

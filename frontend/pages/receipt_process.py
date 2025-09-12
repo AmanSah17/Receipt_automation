@@ -5,14 +5,14 @@ import requests
 import json
 from streamlit_lottie import st_lottie
 import json
-
+from utils import  extract_text_pdfplumber, extract_receipt_data 
 
 
 def load_lottiefile(filepath: str):
     with open(filepath, "r") as f:
         return json.load(f)
 
-st.set_page_config(page_title=" Uploaded file dashboard.", layout="wide",initial_sidebar_state="collapsed")
+st.set_page_config(page_title="dashboard.", layout="wide",initial_sidebar_state="collapsed")
 st.title("Dashbord for Uploaded Receipts in Database")
 
 

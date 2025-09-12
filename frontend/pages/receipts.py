@@ -13,6 +13,18 @@ st.title("Receipt Processing Service")
 
 DB_PATH = "processed_receipts.db"
 
+
+
+
+
+
+
+
+
+
+
+
+
 # ---------------- Create DB schema if not exists ----------------
 def init_db():
     conn = sqlite3.connect(DB_PATH)
