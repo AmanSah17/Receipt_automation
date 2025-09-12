@@ -198,7 +198,7 @@ curl -X POST "http://localhost:8000/process" \
 
 ### Upload Page
 
-![Upload Screenshot](<img src="frontend\static\file_upload.png" alt="Upload and Validation Page" width="400"/>
+!(<img src="frontend\static\file_upload.png" alt="Upload and Validation Page" width="400"/>
 )
 
 ### Receipt List Page
