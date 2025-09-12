@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
-
+from streamlit_lottie import st_lottie
+import json
 
 from config import DB_PATH
 import sqlite3, json
@@ -12,6 +13,13 @@ API_URL = "http://127.0.0.1:8000"
 
 response = requests.get(f"{API_URL}/receipts")
 data = response.json()
+
+
+
+def load_lottiefile(filepath: str):
+    """Load a Lottie animation JSON file"""
+    with open(filepath, "r") as f:
+        return json.load(f)
 
 st.set_page_config(page_title= "Home",page_icon="./static/home.png",initial_sidebar_state="expanded",layout="wide")
 
@@ -33,27 +41,26 @@ with st.container():
             """)
     col1,col2 = st.columns(2)
     with col1:
-        st.image("frontend\static\dashboard.png")
+        #st.image("frontend\static\dashboard.png")
+        lottie_upload = load_lottiefile("frontend\static\Accounting.json")
+        st_lottie(lottie_upload, height=400, width=620, key="validate_process_anim")
 
     with col2:
-        st.markdown("""
-        This web app demonstrates the **Receipt Automation** project. 
-                    Users can:
+        st.header("""Automate Accounts""")
+        st.subheader("The software under the hood utilizes Machine Learning ,Nantural Language Processing , Near Entity Relationship(NLP -NER) "
+        "-- small Language Models  - enabled with complex data parsing technique, it can extract meningful results of your expenses at various outlets.")
+        
 
+        st.text("""
+         – Receipt Management System. A full-stack receipt automation system that allows users to upload, process, and manage receipts.
+            """)
 
-        - Upload scanned receipts (PDF files only !)
-                    
+        st.text("""Backend (FastAPI) – Handles file uploads, validation, receipt extraction, and database operations.Frontend (Streamlit/React) – Provides an interface for uploading receipts, viewing processed data, and managing receipts.
+            SQLite Database – Stores metadata for uploaded receipts.
+                                
                     """)
         
-        st.markdown("""
-                **Developer:** Aman Sah \n
-                **Email:** [amansah1717@gmail.com](mailto:amansah1717@gmail.com)
-                **GitHub:** [github.com/Amansah17](https://github.com/Amansah17)
-                **Portfolio:** [sahaman-smarted.onrender.com](https://sahaman-smarted.onrender.com/)
-                **LinkedIn:** [linkedin.com/in/aman-sah-8a320b14b](https://www.linkedin.com/in/aman-sah-8a320b14b/)
-
-        """)
-
+        
 
 # Two columns layout
 col1, col2 = st.columns(2)
@@ -72,11 +79,24 @@ async def validate_file(file_id: int):
         return response.json()
 
 
-menu = ["Upload Receipt", "Validate Receipt", "Process Receipt", "View Receipts"]
+
+with st.sidebar:
+    st.markdown("### 🌟 Quick Actions Navbar :  Some pages are currently underdevelopment")
+    lottie_sidebar = load_lottiefile("frontend/static/uploading.json")
+    st_lottie(lottie_sidebar, height=250, width=250, key="sidebar_anim")
+
+
+
+
+
+
+
+
+menu = ["Receipt Automation Upload",  "Process Receipt", "View Receipts"]
 choice = st.sidebar.selectbox("Menu", menu)
 file_uploader , validator = st.columns(2)
 
-if choice == "Upload Receipt":
+if choice == "Receipt Automation Upload":
     
 # ---- LEFT COLUMN: Upload ----
     with st.container():
@@ -147,3 +167,14 @@ def save_processed_result(receipt_id, response_json):
     conn.commit()
     conn.close()
     print(f"[DEBUG] Saved receipt_id={receipt_id} into {DB_PATH}")
+
+
+
+
+
+
+
+
+#######################################################################
+############################################
+
