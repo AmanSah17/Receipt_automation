@@ -8,6 +8,8 @@ import json
 from utils import  extract_text_pdfplumber, extract_receipt_data 
 
 
+
+
 def load_lottiefile(filepath: str):
     with open(filepath, "r") as f:
         return json.load(f)

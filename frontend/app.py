@@ -42,7 +42,7 @@ with st.container():
     col1,col2 = st.columns(2)
     with col1:
         #st.image("frontend\static\dashboard.png")
-        lottie_upload = load_lottiefile("frontend/static/Accounting.json")
+        lottie_upload = load_lottiefile("frontend\static\Accounting.json")
         st_lottie(lottie_upload, height=400, width=620, key="validate_process_anim")
 
     with col2:
