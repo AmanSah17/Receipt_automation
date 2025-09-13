@@ -7,6 +7,8 @@ from config import DB_PATH
 import sqlite3, json
 from datetime import datetime
 import httpx
+from pathlib import Path
+
 import asyncio
 #API_URL = "http://127.0.0.1:8000"
 API_URL = "https://receipt-automation-backend-6nbp.onrender.com"
@@ -16,6 +18,30 @@ data = response.json()
 
 
 
+
+# -----------------------------
+# 🔹 Path Helpers (Cross-Platform)
+# -----------------------------
+BASE_DIR = Path(__file__).resolve().parent
+
+def static_file(filename: str) -> str:
+    """Return absolute path to a file in static/ folder"""
+    return str(BASE_DIR / "static" / filename)
+
+
+# ---------------------------
+
+# Test backend connection (optional)
+try:
+    response = requests.get(f"{API_URL}/receipts", timeout=10)
+    data = response.json()
+except Exception as e:
+    data = {"error": str(e)}
+
+
+# -----------------------------
+# 🔹 Utilities
+# -----------------------------
 def load_lottiefile(filepath: str):
     """Load a Lottie animation JSON file"""
     with open(filepath, "r") as f:
@@ -42,8 +68,9 @@ with st.container():
     col1,col2 = st.columns(2)
     with col1:
         #st.image("frontend\static\dashboard.png")
-        lottie_upload = load_lottiefile("frontend\static\Accounting.json")
+        lottie_upload = load_lottiefile(static_file("Accounting.json"))
         st_lottie(lottie_upload, height=400, width=620, key="validate_process_anim")
+        
 
     with col2:
         st.header("""Automate Accounts""")
