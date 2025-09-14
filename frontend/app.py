@@ -10,8 +10,8 @@ import httpx
 from pathlib import Path
 
 import asyncio
-API_URL = "http://127.0.0.1:8000"
-#API_URL = "https://receipt-automation-backend-6nbp.onrender.com"
+#API_URL = "http://127.0.0.1:8000"   #(For Local testing)
+API_URL = "https://receipt-automation-backend-6nbp.onrender.com"   #for productionsetup deployment!)
 
 response = requests.get(f"{API_URL}/receipts")
 data = response.json()
