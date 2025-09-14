@@ -62,9 +62,10 @@ with st.container():
     st.markdown("""
             
             
-     Receipt Automation system that allows users to upload scanned receipts (PDF files only--- currently.)
-     The backend validates files, runs OCR + layout analysis, extracts structured fields (date, merchant, total, line items, taxes, payment method), 
-    stores metadata and parsed results into a lightweight SQLite database.       
+     Receipt Automation system that allows users to upload scanned receipts . \n
+            
+     The backend validates files & extracts structured fields (date, merchant, total, line items, taxes, payment method)
+        stores metadata and parsed results into a lightweight SQLite database.       
             
             
             
@@ -78,7 +79,7 @@ with st.container():
 
     with col2:
         st.header("""Automate Accounts""")
-        st.subheader("The software under the hood utilizes Machine Learning ,Nantural Language Processing , Near Entity Relationship(NLP -NER) "
+        st.text("The software under the hood utilizes Machine Learning ,Nantural Language Processing , Near Entity Relationship(NLP -NER) "
         "-- small Language Models  - enabled with complex data parsing technique, it can extract meningful results of your expenses at various outlets.")
         
 
