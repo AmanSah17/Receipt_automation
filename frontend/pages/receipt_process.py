@@ -1,16 +1,24 @@
 import streamlit as st
 import pandas as pd
 import requests
-
+from pathlib import Path
 import json
 from streamlit_lottie import st_lottie
 import json
 from utils import  extract_text_pdfplumber, extract_receipt_data 
 
+BASE_DIR = Path(__file__).resolve().parent
 
-
+def static_file(filename: str) -> str:
+    """Return absolute path to a file in static/ folder"""
+    return str(BASE_DIR / "static" / filename)
+# -----------------------------
+# 🔹 Path Helpers (Cross-Platform)
+# -----------------------------
+BASE_DIR = Path(__file__).resolve().parent
 
 def load_lottiefile(filepath: str):
+    """Load a Lottie animation JSON file"""
     with open(filepath, "r") as f:
         return json.load(f)
 
@@ -23,9 +31,10 @@ with st.container():
 
     with db:
         st.subheader("step 1 : All the uploaded files gets saved to hosted server locally")
-        lottie_animation_dbs = load_lottiefile("frontend\static\Database store.json")
+        lottie_anim_dbs = load_lottiefile(static_file("Accounting.json"))
+        #st_lottie(lottie_upload, height=400, width=620, key="validate_process_anim")
         st_lottie(
-    lottie_animation_dbs,
+    lottie_anim_dbs,
     speed=1,
     reverse=False,
     loop=True,
