@@ -6,6 +6,7 @@ import json
 from streamlit_lottie import st_lottie
 import json
 from utils import  extract_text_pdfplumber, extract_receipt_data 
+from app import API_URL
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -31,7 +32,7 @@ with st.container():
 
     with db:
         st.subheader("step 1 : All the uploaded files gets saved to hosted server locally")
-        lottie_anim_dbs = load_lottiefile(static_file("Accounting.json"))
+        lottie_anim_dbs = load_lottiefile(static_file("dbs.json"))
         #st_lottie(lottie_upload, height=400, width=620, key="validate_process_anim")
         st_lottie(
     lottie_anim_dbs,
@@ -52,7 +53,7 @@ with st.container():
 
 
         # ---------------- Step 1: Fetch all receipts ----------------
-        response = requests.get("http://localhost:8000/list_receipts/")
+        response = requests.get(f"{API_URL}/list_receipts/")
         if response.status_code == 200:
             receipts = response.json().get("data", [])
             df_receipts = pd.DataFrame(receipts)
@@ -71,7 +72,7 @@ with st.container():
 
 
         if st.button("Process Receipt"):
-            response = requests.post(f"http://localhost:8000/process_receipt/{receipt_id}")
+            response = requests.post(f"{API_URL}/process_receipt/{receipt_id}")
             if response.status_code == 200:
                 data = response.json().get("data", [20])
                 if data:
@@ -82,3 +83,10 @@ with st.container():
                     st.warning("No data returned after processing.")
             else:
                 st.error(f"Error: Please validate the file first .")
+
+
+
+
+
+
+

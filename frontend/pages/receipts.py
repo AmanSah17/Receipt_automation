@@ -6,7 +6,7 @@ from datetime import datetime
 import json
 import os
 
-
+from app import API_URL
 
 st.set_page_config(layout="wide",initial_sidebar_state="collapsed")
 st.title("Receipt Processing Service")
@@ -60,7 +60,7 @@ def get_all_processed():
 init_db()
 
 # ---------------- Step 1: Fetch all receipts ----------------
-response = requests.get("http://localhost:8000/list_receipts/")
+response = requests.get(f"{API_URL}/list_receipts/")
 if response.status_code == 200:
     receipts = response.json().get("data", [])
     df_receipts = pd.DataFrame(receipts)
@@ -73,7 +73,7 @@ else:
 receipt_id = st.number_input("Enter Receipt ID to Process:", min_value=1, step=1)
 
 if st.button("Process Receipt"):
-    response = requests.post(f"http://localhost:8000/process_receipt/{receipt_id}")
+    response = requests.post(f"{API_URL}/process_receipt/{receipt_id}")
     st.balloons()
     if response.status_code == 200:
         data = response.json().get("data", [])

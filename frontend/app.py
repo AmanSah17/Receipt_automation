@@ -11,14 +11,14 @@ from pathlib import Path
 
 import asyncio
 #API_URL = "http://127.0.0.1:8000"   #(For Local testing)
-API_URL = "https://receipt-automation-backend-6nbp.onrender.com/"   #for productionsetup deployment!)
-
-API_URL = os.getenv("API_URL", "http://localhost:8000")
+# import os   # if unused, remove
+API_URL = "https://receipt-automation-backend-6nbp.onrender.com"
 
 response = requests.get(f"{API_URL}/list_receipts/")
-
-#response = requests.get(f"{API_URL}/receipts")
 data = response.json()
+
+
+
 
 
 
