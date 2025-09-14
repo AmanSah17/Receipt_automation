@@ -109,8 +109,9 @@ async def validate_file(file_id: int):
 
 with st.sidebar:
     st.markdown("### 🌟 Quick Actions Navbar :  Some pages are currently underdevelopment")
-    lottie_sidebar = load_lottiefile("frontend/static/uploading.json")
+    lottie_sidebar = load_lottiefile(static_file("uploading.json"))
     st_lottie(lottie_sidebar, height=250, width=250, key="sidebar_anim")
+    
 
 
 
