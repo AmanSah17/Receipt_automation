@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from streamlit_lottie import st_lottie
 import json
-
+import os
 from config import DB_PATH
 import sqlite3, json
 from datetime import datetime
@@ -13,7 +13,11 @@ import asyncio
 #API_URL = "http://127.0.0.1:8000"   #(For Local testing)
 API_URL = "https://receipt-automation-backend-6nbp.onrender.com/"   #for productionsetup deployment!)
 
-response = requests.get(f"{API_URL}/receipts")
+API_URL = os.getenv("API_URL", "http://localhost:8000")
+
+response = requests.get(f"{API_URL}/list_receipts/")
+
+#response = requests.get(f"{API_URL}/receipts")
 data = response.json()
 
 
