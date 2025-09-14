@@ -89,14 +89,33 @@ def extract_receipt_to_dataframe(db: Session, file_id: int, file_name: str):
         data["TRANSACTION_ID"] = match.group()
     if match := PATTERNS["RECEIPT_ID"].search(text):
         data["RECEIPT_ID"] = match.group()
-
     amounts = PATTERNS["AMOUNT"].findall(text)
     if amounts:
         data["TOTAL_EXPENDITURE"] = ", ".join(amounts)
         try:
-            data["TOTAL_AMOUNT"] = float(re.sub(r"[^\d.]", "", amounts[-1]))
+            total_pattern = re.compile(
+                r"(grand total|total amount|amount payable|net total|total)[:\s]*((?:Rs\.?|₹|INR|\$)?\s?[\d,]+(?:\.\d{2})?)",
+                re.I,
+            )
+            if m := total_pattern.search(text):
+                amt_str = m.group(2)
+                # re.sub removes everything except digits and dots so '₹ 1,234.56' becomes '1234.56'
+                data["TOTAL_AMOUNT"] = float(re.sub(r"[^\d.]", "", amt_str))
+            else:
+                # fallback: take the last detected amount
+                data["TOTAL_AMOUNT"] = float(re.sub(r"[^\d.]", "", amounts[-1]))
         except (ValueError, TypeError):
+            print("Total amount cannot be found or parsed in this file.")
             data["TOTAL_AMOUNT"] = 0.0
+
+
+
+
+
+
+
+
+
 
     # --------- spaCy Entities ---------
     for ent in doc.ents:
@@ -108,8 +127,8 @@ def extract_receipt_to_dataframe(db: Session, file_id: int, file_name: str):
             data["PURCHASED_AT"] = ent_text
         elif label == "GPE" and not data["ADDRESS"]:
             data["ADDRESS"] = ent_text
-        elif label == "PERSON" and not data["CUSTOMER_EMAIL"]:
-            data["CUSTOMER_EMAIL"] = ent_text  # heuristic placeholder
+        elif label == "PERSON" and not data["CUSTOMER_NAME"]:
+            data["CUSTOMER_NAME"] = ent_text  # heuristic placeholder
 
     # --------- Payment Method ---------
     if re.search(r"(upi|gpay|phonepe|paytm)", text_lower):
@@ -143,8 +162,4 @@ def extract_receipt_to_dataframe(db: Session, file_id: int, file_name: str):
 
     # --------- Convert to DataFrame ---------
     df = pd.DataFrame([data])
-    return df
-
-# Example usage:
-# df_receipt = extract_receipt_to_dataframe(db_session, file_id=3, file_name="receipt.pdf")
-# print(df_receipt)
+    return d
